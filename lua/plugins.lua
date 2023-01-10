@@ -17,30 +17,22 @@ require('packer').startup({
     -- packer 管理自己的版本
     use { 'wbthomason/packer.nvim' }
 
-    -- 启动时间分析
-    -- use { "dstein64/vim-startuptime", cmd = "StartupTime" }
-
     -- 中文help doc
     use { 'yianwillis/vimcdoc', event = 'VimEnter' }
 
-    -- coc-nvim
-    -- require('pack/coc').config()
-    --use { 'neoclide/coc.nvim', config = "require('pack/coc').config()", branch = 'release' }
-
-    -- Scala
-    use({ 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" } })
-    --require'lspconfig'.metals.setup{}
 
     -- lsp
     use 'neovim/nvim-lspconfig'
+    -- snip
+    use 'L3MON4D3/LuaSnip'
+    use 'saadparwaiz1/cmp_luasnip'
+    -- cmp
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
-    -- snip
-    use 'L3MON4D3/LuaSnip'
-    use 'saadparwaiz1/cmp_luasnip'
+
     -- auto-pairs
     use {
       "windwp/nvim-autopairs",
@@ -50,19 +42,22 @@ require('packer').startup({
     -- Git
     use {
       'lewis6991/gitsigns.nvim',
-      config = function()
-        require('gitsigns').setup()
-      end
+      config = function() require('gitsigns').setup() end
     }
     -- 浮动终端
     -- require('pack/vim-floaterm').config()
     -- use { 'voldikss/vim-floaterm', config = "require('pack/vim-floaterm').setup()" }
 
     -- tree-sitter
-    require('pack/tree-sitter').config()
-    use { 'nvim-treesitter/nvim-treesitter', config = "require('pack/tree-sitter').setup()", run = ':TSUpdate',
-      event = 'BufRead' }
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      config = function() require('pack/tree-sitter').setup() end,
+      run = ':TSUpdate', event = 'BufRead'
+    }
     use { 'nvim-treesitter/playground', after = 'nvim-treesitter' }
+
+    -- 补全高亮
+    use 'folke/lsp-colors.nvim'
 
     -- telescope
     use { 'nvim-lua/plenary.nvim' }
@@ -73,27 +68,45 @@ require('packer').startup({
     use { 'ggandor/leap.nvim', config = "require('leap').add_default_mappings()" }
 
     -- markdown预览插件 导航生成插件
-    require('pack/markdown').config()
+    --use({ "iamcco/markdown-preview.nvim",
+    --  run = function() G.fn["mkdp#util#install"]() end, })
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+      setup = function() require('pack/markdown').config() end, ft = { "markdown" }, })
     use { 'mzlogin/vim-markdown-toc', ft = 'markdown' }
-    use { 'iamcco/markdown-preview.nvim', config = "require('pack/markdown').setup()", run = 'cd app && yarn install',
-      cmd = 'MarkdownPreview', ft = 'markdown' }
+    use { 'jghauser/follow-md-links.nvim' }
+
 
     -- 文件管理器
     require('pack/nvim-tree').config()
-    use { 'kyazdani42/nvim-tree.lua', config = "require('pack/nvim-tree').setup()",
+    use { 'nvim-tree/nvim-tree.lua', config = "require('pack/nvim-tree').setup()",
       cmd = { 'NvimTreeToggle', 'NvimTreeFindFileToggle' } }
 
     -- 图标支持
     use { 'kyazdani42/nvim-web-devicons' }
 
     -- drakula主题:
-    use { 'Mofiqul/dracula.nvim' }
+    -- use { 'Mofiqul/dracula.nvim' }
+
+    -- tokyoniht主题
+    use 'folke/tokyonight.nvim'
+
     -- 状态栏 & 标题栏
     use {
       'nvim-lualine/lualine.nvim',
-      config = "require('pack/lualine').config()",
+      config = function() require('pack/lualine').config() end,
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
+
+    -- list for showing diagnostics, references, telescope results
+    -- 优雅的诊断，引用列表
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function() require('trouble').setup() end
+    }
+
+    -- Scala
+    use({ 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" } })
   end,
   config = {
     git = { clone_timeout = 120, depth = 1 },

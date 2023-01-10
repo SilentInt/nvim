@@ -90,7 +90,7 @@ G.cmd([[
 -- set fillchars=stlnc:#
 
 G.cmd([[
-    colorscheme dracula
+    colorscheme tokyonight-night
     set cmdheight=1
     set updatetime=300
     set shortmess+=cI

@@ -41,7 +41,6 @@ function M.config()
   --        ["@text.todo.unchecked"] = {fg=172};
   --        ["@text.todo.checked"] = {fg=37};
   --    })
-  G.map({ { 'n', 'H', ':TSHighlightCapturesUnderCursor<CR>', { silent = true, noremap = true } } })
 end
 
 function M.setup()
@@ -60,13 +59,7 @@ function M.setup()
         node_decremental = "<TAB>",
       },
     },
-
   }
-
-  -- some custom highlights
-  -- G.cmd('match Todo /TODO\\(:.*\\)*/')
-  ---- Highlight the @foo.bar capture group with the "Identifier" highlight group
-  --G.api.nvim_set_hl(0, "@comment", { link = "NONE" })
 end
 
 return M
