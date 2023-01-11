@@ -18,7 +18,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'pyright', 'ccls', 'marksman', 'hdl_checker', 'jsonls', 'sumneko_lua' }
+local servers = { 'pyright', 'marksman', 'hdl_checker', 'jsonls', 'sumneko_lua' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -26,3 +26,8 @@ for _, lsp in ipairs(servers) do
   }
 end
 require 'lspconfig'.metals.setup {}
+lspconfig.ccls.setup {
+  init_options = {
+    single_file_support = true,
+  }
+}
