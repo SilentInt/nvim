@@ -78,11 +78,11 @@ G.cmd([[
 G.cmd([[ set viminfo=!,'10000,<50,s10,h ]])
 
 -- 折叠
+--     set foldexpr=nvim_treesitter#foldexpr()
 G.cmd([[
     set foldenable
-    set foldmethod=manual
+    set foldmethod=indent
     set foldlevel=99
-    set foldexpr=nvim_treesitter#foldexpr()
     set viewdir=~/.config/nvim/cache/viewdir
 ]])
 

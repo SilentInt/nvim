@@ -7,6 +7,7 @@ G.map({
 G.map({
   { "n", "ge", "<cmd>TroubleToggle<cr>", key_default },
   { "n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", key_default },
-  { "n", "gr", "<cmd>TroubleToggle lsp_references<cr>", key_default }
+  { "n", "gr", "<cmd>TroubleToggle lsp_references<cr>", key_default },
+  { 'n', 'T', '<cmd>NvimTreeToggle $PWD<cr>', key_default }
 })
 G.map({ { 'n', 'H', ':TSHighlightCapturesUnderCursor<CR>', { silent = true, noremap = true } } })

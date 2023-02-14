@@ -107,7 +107,7 @@ require('packer').startup({
     }
 
     -- Scala
-    use({ 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" } })
+    --use({ 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" } })
   end,
   config = {
     git = { clone_timeout = 120, depth = 1 },
